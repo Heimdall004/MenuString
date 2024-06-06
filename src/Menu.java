@@ -4,12 +4,13 @@ import classes.MaxWords;
 import classes.Palindrome;
 import classes.ReadLicense;
 import classes.Separator;
+import interfaces.MenuOptions;
 
 /**
  * Clase Menu.
  * Esta clase proporciona una interfaz de menú para interactuar con varias funcionalidades de texto.
  */
-public class Menu {
+public class Menu implements MenuOptions {
 
     private final Scanner in;
     private byte option;
@@ -57,11 +58,14 @@ public class Menu {
     }
 
     /**
-     * Maneja las opciones del usuario basándose en la entrada.
-     * @param option La opción seleccionada por el usuario.
-     * @return El resultado de la operación seleccionada.
+     * Maneja la opción seleccionada por el usuario.
+     *
+     * @param option la opción de menú seleccionada por el usuario.
+     * @return un mensaje String que indica el resultado de la acción.
+     * @throws IllegalArgumentException si la opción proporcionada es inválida.
      */
-    private String handleOption(byte option) {
+    @Override
+    public String handleOption(byte option) throws IllegalArgumentException {
         return switch (option) {
             case 1 -> separator.separatorString();
             case 2 -> maxWords.maxWords();
@@ -74,9 +78,10 @@ public class Menu {
     }
 
     /**
-     * Muestra el menú de opciones al usuario.
+     * Muestra las opciones del menú al usuario.
      */
-    private void displayMenu() {
+    @Override
+    public void displayMenu() {
         System.out.print("""
             Opciones:
                 1- Separador de texto
@@ -86,7 +91,7 @@ public class Menu {
                 5- Licencia
                 6- Salir
                 
-                """);
+            """);
         System.out.print("Seleccione su opción: ");
     }
 }
